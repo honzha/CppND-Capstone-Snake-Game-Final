@@ -8,9 +8,10 @@ Game::Game(std::size_t grid_width, std::size_t grid_height)
       random_w(0, static_cast<int>(grid_width)),
       random_h(0, static_cast<int>(grid_height)) {
   PlaceFood();
+//  PlaceReward();
 }
 
-void Game::Run(Controller const &controller, Renderer &renderer,
+void Game::Run(Controller const &controller, RevController const &revcontroller, Renderer &renderer,
                std::size_t target_frame_duration) {
   Uint32 title_timestamp = SDL_GetTicks();
   Uint32 frame_start;
@@ -23,9 +24,13 @@ void Game::Run(Controller const &controller, Renderer &renderer,
     frame_start = SDL_GetTicks();
 
     // Input, Update, Render - the main game loop.
+    if (speed_up_sts == false) {
     controller.HandleInput(running, snake);
+  }else {
+    revcontroller.RevHandleInput(running, snake);
+    }
     Update();
-    renderer.Render(snake, food, speed_up);
+    renderer.Render(snake, food, speed_up, score);
 
     frame_end = SDL_GetTicks();
 
@@ -83,7 +88,7 @@ void Game::PlaceReward() {
 void Game::Update() {
   if (!snake.alive) return;
 
-  snake.Update();
+  snake.Update(score);
 
   int new_x = static_cast<int>(snake.head_x);
   int new_y = static_cast<int>(snake.head_y);
@@ -94,16 +99,22 @@ void Game::Update() {
     PlaceFood();
     // Grow snake and increase speed.
     snake.GrowBody();
-    snake.speed += 0.02;
+    snake.speed += 0.01;
+    speed_up_sts = false;
   }
 
-  // Check if there's food over here
-  if (speed_up.x == new_x && speed_up.y == new_y) {
-    score++;
-    PlaceReward();
-    // Grow snake and increase speed.
-    snake.GrowBody();
-    snake.speed += 0.03;
+  // Check if there's speed up food over here
+  if (score >= 3 && score<= 5) {
+    if (speed_up.x == new_x && speed_up.y == new_y) {
+      //score++;
+      speed_up_sts = true;
+      PlaceReward();
+      // Grow snake and increase speed.
+      snake.GrowBody();
+      snake.speed -= 0.01;
+    }
+  } else {
+    speed_up_sts = false;
   }
 }
 

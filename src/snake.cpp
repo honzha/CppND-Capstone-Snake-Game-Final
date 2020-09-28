@@ -1,8 +1,9 @@
 #include "snake.h"
+#include "game.h"
 #include <cmath>
 #include <iostream>
 
-void Snake::Update() {
+void Snake::Update(int score) {
   SDL_Point prev_cell{
       static_cast<int>(head_x),
       static_cast<int>(
@@ -11,11 +12,10 @@ void Snake::Update() {
   SDL_Point current_cell{
       static_cast<int>(head_x),
       static_cast<int>(head_y)};  // Capture the head's cell after updating.
-
   // Update all of the body vector items if the snake head has moved to a new
   // cell.
   if (current_cell.x != prev_cell.x || current_cell.y != prev_cell.y) {
-    UpdateBody(current_cell, prev_cell);
+    UpdateBody(current_cell, prev_cell, score);
   }
 }
 
@@ -43,7 +43,7 @@ void Snake::UpdateHead() {
   head_y = fmod(head_y + grid_height, grid_height);
 }
 
-void Snake::UpdateBody(SDL_Point &current_head_cell, SDL_Point &prev_head_cell) {
+void Snake::UpdateBody(SDL_Point &current_head_cell, SDL_Point &prev_head_cell, int &score) {
   // Add previous head location to vector
   body.push_back(prev_head_cell);
 
@@ -59,6 +59,15 @@ void Snake::UpdateBody(SDL_Point &current_head_cell, SDL_Point &prev_head_cell) 
   for (auto const &item : body) {
     if (current_head_cell.x == item.x && current_head_cell.y == item.y) {
       alive = false;
+    }
+  }
+
+  // Check if the snake hit the wall.
+  if (score >=7 && score <= 10) {
+    for (int i = 0; i < 10; i++) {
+      if (current_head_cell.x == (6 + i) && current_head_cell.y == (3)) {
+        alive = false;
+      }
     }
   }
 }

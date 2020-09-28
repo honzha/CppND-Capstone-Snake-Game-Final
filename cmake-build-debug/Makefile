@@ -231,6 +231,33 @@ src/renderer.cpp.s:
 	$(MAKE) -f CMakeFiles/SnakeGame.dir/build.make CMakeFiles/SnakeGame.dir/src/renderer.cpp.s
 .PHONY : src/renderer.cpp.s
 
+src/revcontroller.o: src/revcontroller.cpp.o
+
+.PHONY : src/revcontroller.o
+
+# target to build an object file
+src/revcontroller.cpp.o:
+	$(MAKE) -f CMakeFiles/SnakeGame.dir/build.make CMakeFiles/SnakeGame.dir/src/revcontroller.cpp.o
+.PHONY : src/revcontroller.cpp.o
+
+src/revcontroller.i: src/revcontroller.cpp.i
+
+.PHONY : src/revcontroller.i
+
+# target to preprocess a source file
+src/revcontroller.cpp.i:
+	$(MAKE) -f CMakeFiles/SnakeGame.dir/build.make CMakeFiles/SnakeGame.dir/src/revcontroller.cpp.i
+.PHONY : src/revcontroller.cpp.i
+
+src/revcontroller.s: src/revcontroller.cpp.s
+
+.PHONY : src/revcontroller.s
+
+# target to generate assembly for a file
+src/revcontroller.cpp.s:
+	$(MAKE) -f CMakeFiles/SnakeGame.dir/build.make CMakeFiles/SnakeGame.dir/src/revcontroller.cpp.s
+.PHONY : src/revcontroller.cpp.s
+
 src/snake.o: src/snake.cpp.o
 
 .PHONY : src/snake.o
@@ -279,6 +306,9 @@ help:
 	@echo "... src/renderer.o"
 	@echo "... src/renderer.i"
 	@echo "... src/renderer.s"
+	@echo "... src/revcontroller.o"
+	@echo "... src/revcontroller.i"
+	@echo "... src/revcontroller.s"
 	@echo "... src/snake.o"
 	@echo "... src/snake.i"
 	@echo "... src/snake.s"

@@ -67,10 +67,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/udacity/Desktop/Udacity/CppND-Capstone-Snake-Game/CppND-Capstone-Snake-Game-master
+CMAKE_SOURCE_DIR = /home/udacity/Desktop/Udacity/CppND-Capstone-Snake-Game/CppND-Capstone-Snake-Game-Final
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/udacity/Desktop/Udacity/CppND-Capstone-Snake-Game/CppND-Capstone-Snake-Game-master/build
+CMAKE_BINARY_DIR = /home/udacity/Desktop/Udacity/CppND-Capstone-Snake-Game/CppND-Capstone-Snake-Game-Final/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -99,9 +99,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/udacity/Desktop/Udacity/CppND-Capstone-Snake-Game/CppND-Capstone-Snake-Game-master/build/CMakeFiles /home/udacity/Desktop/Udacity/CppND-Capstone-Snake-Game/CppND-Capstone-Snake-Game-master/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/udacity/Desktop/Udacity/CppND-Capstone-Snake-Game/CppND-Capstone-Snake-Game-Final/build/CMakeFiles /home/udacity/Desktop/Udacity/CppND-Capstone-Snake-Game/CppND-Capstone-Snake-Game-Final/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/udacity/Desktop/Udacity/CppND-Capstone-Snake-Game/CppND-Capstone-Snake-Game-master/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/udacity/Desktop/Udacity/CppND-Capstone-Snake-Game/CppND-Capstone-Snake-Game-Final/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -250,6 +250,33 @@ src/renderer.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SnakeGame.dir/build.make CMakeFiles/SnakeGame.dir/src/renderer.cpp.s
 .PHONY : src/renderer.cpp.s
 
+src/revcontroller.o: src/revcontroller.cpp.o
+
+.PHONY : src/revcontroller.o
+
+# target to build an object file
+src/revcontroller.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SnakeGame.dir/build.make CMakeFiles/SnakeGame.dir/src/revcontroller.cpp.o
+.PHONY : src/revcontroller.cpp.o
+
+src/revcontroller.i: src/revcontroller.cpp.i
+
+.PHONY : src/revcontroller.i
+
+# target to preprocess a source file
+src/revcontroller.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SnakeGame.dir/build.make CMakeFiles/SnakeGame.dir/src/revcontroller.cpp.i
+.PHONY : src/revcontroller.cpp.i
+
+src/revcontroller.s: src/revcontroller.cpp.s
+
+.PHONY : src/revcontroller.s
+
+# target to generate assembly for a file
+src/revcontroller.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SnakeGame.dir/build.make CMakeFiles/SnakeGame.dir/src/revcontroller.cpp.s
+.PHONY : src/revcontroller.cpp.s
+
 src/snake.o: src/snake.cpp.o
 
 .PHONY : src/snake.o
@@ -298,6 +325,9 @@ help:
 	@echo "... src/renderer.o"
 	@echo "... src/renderer.i"
 	@echo "... src/renderer.s"
+	@echo "... src/revcontroller.o"
+	@echo "... src/revcontroller.i"
+	@echo "... src/revcontroller.s"
 	@echo "... src/snake.o"
 	@echo "... src/snake.i"
 	@echo "... src/snake.s"

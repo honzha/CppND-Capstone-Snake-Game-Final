@@ -38,10 +38,15 @@ Renderer::~Renderer() {
   SDL_Quit();
 }
 
-void Renderer::Render(Snake const snake, SDL_Point const &food, SDL_Point const &speed_up) {
+void Renderer::Render(Snake const snake, SDL_Point const &food, SDL_Point const &speed_up, int score) {
   SDL_Rect block;
+  SDL_Rect speedUpBlock;
+
   block.w = screen_width / grid_width;
   block.h = screen_height / grid_height;
+
+  speedUpBlock.w = block.w;
+  speedUpBlock.h = block.h;
 
   // Clear screen
   SDL_SetRenderDrawColor(sdl_renderer, 0x1E, 0x1E, 0x1E, 0xFF);
@@ -54,11 +59,22 @@ void Renderer::Render(Snake const snake, SDL_Point const &food, SDL_Point const 
   SDL_RenderFillRect(sdl_renderer, &block);
 
   // Render speed_up
-  SDL_SetRenderDrawColor(sdl_renderer, 0xEA, 0x50, 0x4D, 0x01);
-  block.x = speed_up.x * block.w;
-  block.y = speed_up.y * block.h;
-  SDL_RenderFillRect(sdl_renderer, &block);
+  SDL_SetRenderDrawColor(sdl_renderer, 0xEA, 0x50, 0x4D, 0x01); // pink
+  speedUpBlock.x = speed_up.x * block.w;
+  speedUpBlock.y = speed_up.y * block.h;
+  if (score >= 3 && score <= 5) {
+    SDL_RenderFillRect(sdl_renderer, &speedUpBlock);
+  }
 
+  // Render wall
+  SDL_SetRenderDrawColor(sdl_renderer, 0xA9, 0x5C, 0x37, 0x01); // pink
+  if (score >=7 && score <= 10) {
+    for (int i = 0; i < 10; i++) {
+      block.x = (6 + i) * block.w;
+      block.y = (3) * block.h;
+      SDL_RenderFillRect(sdl_renderer, &block);
+    }
+  }
   // Render snake's body
   SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0xFF, 0xFF, 0xFF);
   for (SDL_Point const &point : snake.body) {
@@ -82,6 +98,18 @@ void Renderer::Render(Snake const snake, SDL_Point const &food, SDL_Point const 
 }
 
 void Renderer::UpdateWindowTitle(int score, int fps) {
-  std::string title{"Snake Score: " + std::to_string(score) + " FPS: " + std::to_string(fps)};
-  SDL_SetWindowTitle(sdl_window, title.c_str());
+//  std::string title{"Snake Score: " + std::to_string(score) + " FPS: " + std::to_string(fps)};
+  if (score >= 3 && score <= 5) {
+    std::string title{"Snake Score: " + std::to_string(score) + " FPS: " + std::to_string(fps) + \
+    "   " + "Reverse food appear "};
+    SDL_SetWindowTitle(sdl_window, title.c_str());
+  } else if (score >=7 && score <= 10) {
+      std::string title{"Snake Score: " + std::to_string(score) + " FPS: " + std::to_string(fps) + \
+    "   " + "Wall appear "};
+      SDL_SetWindowTitle(sdl_window, title.c_str());
+  } else {
+    std::string title{"Snake Score: " + std::to_string(score) + " FPS: " + std::to_string(fps)};
+    SDL_SetWindowTitle(sdl_window, title.c_str());
+  }
+//  SDL_SetWindowTitle(sdl_window, title.c_str());
 }
